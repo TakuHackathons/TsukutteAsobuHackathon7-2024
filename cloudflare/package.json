@@ -2,13 +2,19 @@
   "name": "tsukutteasobuhackathon",
   "scripts": {
     "dev": "wrangler dev src/index.ts",
-    "deploy": "wrangler deploy --minify src/index.ts"
+    "deploy": "wrangler deploy --minify src/index.ts",
+    "format": "prettier --config .prettierrc --write \"src/**/*.{ts,js}\""
   },
   "dependencies": {
-    "hono": "^4.6.2"
+    "groq-sdk": "^0.7.0",
+    "hono": "^4.6.2",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240529.0",
+    "@types/lodash": "^4.17.7",
+    "@types/node": "^22.5.5",
+    "prettier": "^3.3.3",
     "wrangler": "^3.57.2"
   }
 }
