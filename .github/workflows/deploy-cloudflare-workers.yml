@@ -27,5 +27,6 @@ jobs:
     - name: deploy to cloudflare workers
       uses: cloudflare/wrangler-action@v3
       with:
+        workingDirectory: ${{ matrix.root-project-path }}
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
