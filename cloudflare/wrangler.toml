@@ -1,6 +1,7 @@
 name = "tsukutteasobuhackathon"
 compatibility_date = "2024-09-23"
 compatibility_flags = [ "nodejs_compat" ]
+main = "src/index.ts"
 
 # [vars]
 # MY_VAR = "my-variable"
