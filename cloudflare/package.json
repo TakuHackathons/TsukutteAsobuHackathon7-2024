@@ -4,6 +4,7 @@
     "dev": "wrangler dev src/index.ts",
     "deploy": "wrangler deploy --minify src/index.ts",
     "wrangler": "wrangler",
+    "put-secrets": "node scripts/convert-dotenv-to-json.js | wrangler secret bulk .env.json",
     "format": "prettier --config .prettierrc --write \"src/**/*.{ts,js}\""
   },
   "dependencies": {
@@ -15,6 +16,7 @@
     "@cloudflare/workers-types": "^4.20240529.0",
     "@types/lodash": "^4.17.7",
     "@types/node": "^22.5.5",
+    "dotenv": "^16.4.5",
     "prettier": "^3.3.3",
     "wrangler": "^3.57.2"
   }
