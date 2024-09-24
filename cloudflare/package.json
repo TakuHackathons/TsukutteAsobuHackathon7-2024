@@ -3,6 +3,7 @@
   "scripts": {
     "dev": "wrangler dev src/index.ts",
     "deploy": "wrangler deploy --minify src/index.ts",
+    "wrangler": "wrangler",
     "format": "prettier --config .prettierrc --write \"src/**/*.{ts,js}\""
   },
   "dependencies": {
