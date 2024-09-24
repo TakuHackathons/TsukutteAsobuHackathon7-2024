@@ -21,6 +21,9 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
+    - name: yarn install
+      working-directory: ${{ matrix.root-project-path }}
+      run: yarn install
     - name: deploy to cloudflare workers
       uses: cloudflare/wrangler-action@v3
       with:
