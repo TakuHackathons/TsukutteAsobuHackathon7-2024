@@ -30,8 +30,8 @@ export default function Home() {
       const generatedMessage = await generateChatMessage(userMessage);
       const messageChoices = generatedMessage.choices || [];
       const messageChoice = messageChoices[0] || {};
-      if (messageChoice.content) {
-        await speakCharacter(speakerStyle.id, messageChoice.content, viewer);
+      if (messageChoice.message?.content) {
+        await speakCharacter(speakerStyle.id, messageChoice.message.content, viewer);
       }
     }
   };
