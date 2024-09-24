@@ -1,17 +1,39 @@
 'use client';
 
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { VrmViewer } from '../compoments/vrmViewer';
 import { ViewerContext } from '../features/vrmViewer/viewerContext';
 import { IconButton } from '../compoments/iconButton';
-import { speakCharacter } from '../features/speak-character';
+import { speakCharacter, loadSpeackers } from '../features/speak-character';
+import { loadLlmModels, generateChatMessage } from '../features/chat-api';
 
 export default function Home() {
   const { viewer } = useContext(ViewerContext);
+  const [speakerStyle, setSpeakerStyle] = useState<{ [key: string]: any }>({});
   const [userMessage, setUserMessage] = useState('');
 
+  useEffect(() => {
+    (async () => {
+      const speakers = await loadSpeackers();
+      const targetSpeackerName = 'ずんだもん';
+      const targetSpeacker = speakers.find((speacker: any) => speacker.name === targetSpeackerName) || {};
+      // 'ノーマル', 'あまあま', 'ツンツン', 'セクシー', 'ささやき', 'ヒソヒソ' がある
+      const targetSpeackerStyle = targetSpeacker.styles?.find((style: any) => style.name === 'あまあま');
+      if (targetSpeackerStyle) {
+        setSpeakerStyle(targetSpeackerStyle);
+      }
+    })();
+  }, []);
+
   const onTestClick = async () => {
-    await speakCharacter(userMessage, viewer);
+    if (speakerStyle.id) {
+      const generatedMessage = await generateChatMessage(userMessage);
+      const messageChoices = generatedMessage.choices || [];
+      const messageChoice = messageChoices[0] || {};
+      if (messageChoice.content) {
+        await speakCharacter(speakerStyle.id, messageChoice.content, viewer);
+      }
+    }
   };
 
   return (
